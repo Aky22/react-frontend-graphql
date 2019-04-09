@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'eval',
   mode: 'development',
   entry: [
-    'webpack-dev-server/client?http://localhost:3000',
+    'webpack-dev-server/client?http://localhost:3300',
     './src/index'
   ],
   output: {
@@ -21,6 +21,21 @@ module.exports = {
       test: /\.tsx?$/,
       loader: "awesome-typescript-loader",
       include: path.join(__dirname, 'src')
+    },{
+      test: /\.css$/,
+      use: [
+        "style-loader",
+        {
+          loader: "css-loader",
+          options: {
+            modules: true, // default is false
+            sourceMap: true,
+            importLoaders: 1,
+            localIdentName: "[name]--[local]--[hash:base64:8]"
+          }
+        },
+        "postcss-loader"
+      ]
     }]
   }
 };
