@@ -1,0 +1,78 @@
+input CreateProjectInput {
+    name: String
+    description: String
+    userIDs: [Int]
+}
+
+input CreateTaskInput {
+    name: String
+    description: String
+    projectID: Int
+}
+
+input CreateUserInput {
+    username: String!
+    password: String!
+    email: String!
+    role: UserRole!
+}
+
+type JwtPayload {
+    expires_in: Int
+    access_token: String
+    user_id: User
+    status: Int
+}
+
+type Mutation {
+    createProject(createProjectInput: CreateProjectInput): Project
+    createTask(createTaskInput: CreateTaskInput): Task
+    createUser(createUserInput: CreateUserInput): User
+}
+
+type Project {
+    id: Int
+    name: String
+    description: String
+    tasks: [Task]
+    taskCount: Int
+    users: User
+}
+
+type Query {
+    getProjects: [Project]
+    project(id: ID!): Project
+    getTasks: [Task]
+    task(id: ID!): Task
+    getUsers: [User]
+    user(id: ID!): User
+    login(username: String!, password: String): JwtPayload
+    temp__: Boolean
+}
+
+type Subscription {
+    projectCreated: Project
+    taskCreated: Task
+    userCreated: User
+}
+
+type Task {
+    id: Int
+    name: String
+    description: String
+    project: Project
+}
+
+type User {
+    id: Int
+    username: String
+    password: String
+    email: String
+    role: String
+}
+
+enum UserRole {
+    ADMIN
+    EDITOR
+    GUEST
+}

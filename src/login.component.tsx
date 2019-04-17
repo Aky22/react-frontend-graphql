@@ -5,8 +5,8 @@ import {Component} from "react";
 import gql from "graphql-tag";
 import {ApolloClient, HttpLink, InMemoryCache} from "apollo-client-preset";
 import {inject, observer, Provider} from "mobx-react";
-import ProjectsWithState from "./ProjectComponent";
 import Button from "react-toolbox/lib/button";
+import ProjectComponent from "./ProjectComponent";
 
 const userLogin = gql`
     query($username: String!, $password: String!)
@@ -58,7 +58,7 @@ const LoginComponent = inject('userStore')(
 
             render() {
                 if(this.state.status == 200){
-                    return (<ProjectsWithState />);
+                    return (<ProjectComponent />);
                 }else {
                     return (
                         <div>
