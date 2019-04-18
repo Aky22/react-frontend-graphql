@@ -5,7 +5,7 @@ import {Component} from "react";
 import gql from "graphql-tag";
 import {ApolloClient, HttpLink, InMemoryCache} from "apollo-client-preset";
 import {inject, observer, Provider} from "mobx-react";
-import ProjectsWithState from "./ProjectComponent";
+import ProjectsWithState from "./project.component";
 import Button from "react-toolbox/lib/button";
 
 const userLogin = gql`
